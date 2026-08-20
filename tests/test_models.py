@@ -241,19 +241,19 @@ class TestProductModel(unittest.TestCase):
         tempered_product["available"] = "RandomText"
         target_product = ProductFactory()
         self.assertRaises(
-            DataValidationError, 
-            target_product.deserialize, 
+            DataValidationError,
+            target_product.deserialize,
             tempered_product)
 
     def test_deserialize_missing_prop_error(self):
         """It should raise an error when missing properties"""
         product = ProductFactory()
         tempered_product = product.serialize()
-        del(tempered_product["name"])
+        del tempered_product["name"]
         target_product = ProductFactory()
         self.assertRaises(
-            DataValidationError, 
-            target_product.deserialize, 
+            DataValidationError,
+            target_product.deserialize,
             tempered_product)
 
     def test_deserialize_category_error(self):
@@ -263,16 +263,16 @@ class TestProductModel(unittest.TestCase):
         tempered_product["category"] = "ThisIsNotAValidCategory"
         target_product = ProductFactory()
         self.assertRaises(
-            DataValidationError, 
-            target_product.deserialize, 
+            DataValidationError,
+            target_product.deserialize,
             tempered_product)
 
     def test_deserialize_null_error(self):
         """It should raise an error when deserializing null product"""
         target_product = ProductFactory()
         self.assertRaises(
-            DataValidationError, 
-            target_product.deserialize, 
+            DataValidationError,
+            target_product.deserialize,
             None)
 
     def test_update_null_id_error(self):
@@ -281,5 +281,5 @@ class TestProductModel(unittest.TestCase):
         product.create()
         product.id = None
         self.assertRaises(
-            DataValidationError, 
+            DataValidationError,
             product.update)
